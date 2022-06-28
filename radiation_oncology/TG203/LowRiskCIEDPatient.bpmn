@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1efzfhk" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.1">
+  <bpmn:collaboration id="Collaboration_1bdlqiv">
+    <bpmn:participant id="Participant_1g1m4m5" name="Low Risk CIED Patient" processRef="LowRiskCIEDPatientProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="LowRiskCIEDPatientProcess" name="Low Risk CIED Patient" isExecutable="true">
+    <bpmn:laneSet id="LaneSet_1rd051n">
+      <bpmn:lane id="Lane_0rc80mj" name="RO Dynamics">
+        <bpmn:flowNodeRef>ExclusiveGateway_1h59rsd</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>StartEvent_1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1s13ile" name="Therapist">
+        <bpmn:flowNodeRef>LowRiskCIEDPatientChecklistTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1iioc1k</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_1953z9l" name="Nursing">
+        <bpmn:flowNodeRef>CommunicateWithCardiologyElectrophysiologyTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>CIEDInterrogationBeforeFirstFractionTask</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_0bc690z</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_0a7cg5g</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>EndEvent_1tgepwk</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>CIEDInterrogationAfterLastFractionTask</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:sequenceFlow id="SequenceFlow_1s39sj6" sourceRef="LowRiskCIEDPatientChecklistTask" targetRef="EndEvent_1iioc1k" />
+    <bpmn:sequenceFlow id="SequenceFlow_1m03nrc" sourceRef="StartEvent_1" targetRef="ExclusiveGateway_1h59rsd" />
+    <bpmn:sequenceFlow id="SequenceFlow_1wdabqb" sourceRef="ExclusiveGateway_1h59rsd" targetRef="LowRiskCIEDPatientChecklistTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_1fod6hn" sourceRef="ExclusiveGateway_1h59rsd" targetRef="CommunicateWithCardiologyElectrophysiologyTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_03mtpeq" sourceRef="ExclusiveGateway_1h59rsd" targetRef="CIEDInterrogationBeforeFirstFractionTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_1dwqo1s" sourceRef="ExclusiveGateway_1h59rsd" targetRef="CIEDInterrogationAfterLastFractionTask" />
+    <bpmn:userTask id="LowRiskCIEDPatientChecklistTask" name="Low Risk CIED Patient Checklist" camunda:formKey="BASIC_FORM" camunda:candidateGroups="therapist">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="resuscitationProtocol" label="Resuscitation Protocol" type="boolean" />
+          <camunda:formField id="equipmentAvailable" label="Pacemaker Magnet/Pulse Oximetry, AED Available at Tx Unit" type="boolean" />
+          <camunda:formField id="avMonitoringScheduled" label="Audio-Visual Monitoring Scheduled During Treatment" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1wdabqb</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1s39sj6</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:parallelGateway id="ExclusiveGateway_1h59rsd">
+      <bpmn:incoming>SequenceFlow_1m03nrc</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1wdabqb</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1fod6hn</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_03mtpeq</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1dwqo1s</bpmn:outgoing>
+    </bpmn:parallelGateway>
+    <bpmn:startEvent id="StartEvent_1" name="Start Low Risk CIED Patient">
+      <bpmn:outgoing>SequenceFlow_1m03nrc</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_1iioc1k" name="End Low Risk CIED Patient">
+      <bpmn:incoming>SequenceFlow_1s39sj6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:manualTask id="CommunicateWithCardiologyElectrophysiologyTask" name="Communicate with Cardiology/Electrophysiology">
+      <bpmn:incoming>SequenceFlow_1fod6hn</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0o5rbb1</bpmn:outgoing>
+    </bpmn:manualTask>
+    <bpmn:userTask id="CIEDInterrogationBeforeFirstFractionTask" name="Schedule CIED Interrogation Before 1st Fraction" camunda:candidateGroups="nurse">
+      <bpmn:incoming>SequenceFlow_03mtpeq</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0csoio7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="EndEvent_0bc690z" name="End Low Risk CIED Patient">
+      <bpmn:incoming>SequenceFlow_0csoio7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_0a7cg5g" name="End Low Risk CIED Patient">
+      <bpmn:incoming>SequenceFlow_0o5rbb1</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_1tgepwk" name="End Low Risk CIED Patient">
+      <bpmn:incoming>SequenceFlow_1xmx8nn</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0o5rbb1" sourceRef="CommunicateWithCardiologyElectrophysiologyTask" targetRef="EndEvent_0a7cg5g" />
+    <bpmn:sequenceFlow id="SequenceFlow_0csoio7" sourceRef="CIEDInterrogationBeforeFirstFractionTask" targetRef="EndEvent_0bc690z" />
+    <bpmn:sequenceFlow id="SequenceFlow_1xmx8nn" sourceRef="CIEDInterrogationAfterLastFractionTask" targetRef="EndEvent_1tgepwk" />
+    <bpmn:userTask id="CIEDInterrogationAfterLastFractionTask" name="Schedule CIED Interrogation After Last Fraction" camunda:candidateGroups="nurse">
+      <bpmn:incoming>SequenceFlow_1dwqo1s</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1xmx8nn</bpmn:outgoing>
+    </bpmn:userTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1bdlqiv">
+      <bpmndi:BPMNShape id="Participant_1g1m4m5_di" bpmnElement="Participant_1g1m4m5" isHorizontal="true">
+        <dc:Bounds x="121" y="74" width="483" height="586" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="218" y="103" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="200" y="146" width="72" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ParallelGateway_0q2kwsr_di" bpmnElement="ExclusiveGateway_1h59rsd">
+        <dc:Bounds x="290" y="96" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1inq34c_di" bpmnElement="LowRiskCIEDPatientChecklistTask">
+        <dc:Bounds x="371" y="207" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ManualTask_0qmwjxs_di" bpmnElement="CommunicateWithCardiologyElectrophysiologyTask">
+        <dc:Bounds x="371" y="340" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_0cenhga_di" bpmnElement="CIEDInterrogationBeforeFirstFractionTask">
+        <dc:Bounds x="371" y="450" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0bc690z_di" bpmnElement="EndEvent_0bc690z">
+        <dc:Bounds x="527" y="472" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="511" y="515" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0a7cg5g_di" bpmnElement="EndEvent_0a7cg5g">
+        <dc:Bounds x="527" y="362" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="511" y="405" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1iioc1k_di" bpmnElement="EndEvent_1iioc1k">
+        <dc:Bounds x="526" y="229" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="510" y="272" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1tgepwk_di" bpmnElement="EndEvent_1tgepwk">
+        <dc:Bounds x="527" y="582" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="511" y="625" width="68" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1s39sj6_di" bpmnElement="SequenceFlow_1s39sj6">
+        <di:waypoint x="471" y="247" />
+        <di:waypoint x="526" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1m03nrc_di" bpmnElement="SequenceFlow_1m03nrc">
+        <di:waypoint x="254" y="121" />
+        <di:waypoint x="290" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1wdabqb_di" bpmnElement="SequenceFlow_1wdabqb">
+        <di:waypoint x="315" y="146" />
+        <di:waypoint x="315" y="247" />
+        <di:waypoint x="371" y="247" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1fod6hn_di" bpmnElement="SequenceFlow_1fod6hn">
+        <di:waypoint x="315" y="146" />
+        <di:waypoint x="315" y="380" />
+        <di:waypoint x="371" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_03mtpeq_di" bpmnElement="SequenceFlow_03mtpeq">
+        <di:waypoint x="315" y="146" />
+        <di:waypoint x="315" y="490" />
+        <di:waypoint x="371" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0csoio7_di" bpmnElement="SequenceFlow_0csoio7">
+        <di:waypoint x="471" y="490" />
+        <di:waypoint x="527" y="490" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0o5rbb1_di" bpmnElement="SequenceFlow_0o5rbb1">
+        <di:waypoint x="471" y="380" />
+        <di:waypoint x="527" y="380" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1dwqo1s_di" bpmnElement="SequenceFlow_1dwqo1s">
+        <di:waypoint x="315" y="146" />
+        <di:waypoint x="315" y="600" />
+        <di:waypoint x="371" y="600" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1xmx8nn_di" bpmnElement="SequenceFlow_1xmx8nn">
+        <di:waypoint x="471" y="600" />
+        <di:waypoint x="527" y="600" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Lane_0rc80mj_di" bpmnElement="Lane_0rc80mj" isHorizontal="true">
+        <dc:Bounds x="151" y="74" width="453" height="109" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1s13ile_di" bpmnElement="Lane_1s13ile" isHorizontal="true">
+        <dc:Bounds x="151" y="183" width="453" height="128" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_1953z9l_di" bpmnElement="Lane_1953z9l" isHorizontal="true">
+        <dc:Bounds x="151" y="311" width="453" height="349" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1tfohfc_di" bpmnElement="CIEDInterrogationAfterLastFractionTask">
+        <dc:Bounds x="371" y="560" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

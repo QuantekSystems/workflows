@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_1i0d18y" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="3.0.1">
+  <bpmn:collaboration id="Collaboration_1d5a0he">
+    <bpmn:participant id="Participant_1s299od" name="Nursing" processRef="MediumRiskCIEDPatientProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="MediumRiskCIEDPatientProcess" name="Medium Risk CIED Patient" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" name="Start Medium Risk CIED Patient">
+      <bpmn:outgoing>SequenceFlow_101eypm</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_1kdmkrl" name="End Medium Risk CIED Patient">
+      <bpmn:incoming>SequenceFlow_11mnpy7</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="MediumRiskCIEDChecklistTask" name="Medium Risk CIED Checklist" camunda:formKey="BASIC_FORM" camunda:candidateGroups="nurse">
+      <bpmn:extensionElements>
+        <camunda:formData>
+          <camunda:formField id="consultWithCardiologyAndElectrophysiology" label="Formal Consultation with Cardiology/Electrophysiology" type="boolean" />
+          <camunda:formField id="cardiacSupport" label="Appopriate Cardiac Support Available to Manage Complications and Malfunctions" type="boolean" />
+          <camunda:formField id="ciedTechInterrogateMidTreatment" label="CIED Technologist to Interrogate the Device Mid-Treatment" type="boolean" />
+        </camunda:formData>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_101eypm</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_11mnpy7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:sequenceFlow id="SequenceFlow_101eypm" sourceRef="StartEvent_1" targetRef="MediumRiskCIEDChecklistTask" />
+    <bpmn:sequenceFlow id="SequenceFlow_11mnpy7" sourceRef="MediumRiskCIEDChecklistTask" targetRef="EndEvent_1kdmkrl" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1d5a0he">
+      <bpmndi:BPMNShape id="Participant_1s299od_di" bpmnElement="Participant_1s299od" isHorizontal="true">
+        <dc:Bounds x="115" y="38" width="372" height="131" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="179" y="81" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="153" y="124" width="89" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1kdmkrl_di" bpmnElement="EndEvent_1kdmkrl">
+        <dc:Bounds x="415" y="81" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="390" y="124" width="87" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="UserTask_1ncjg7r_di" bpmnElement="MediumRiskCIEDChecklistTask">
+        <dc:Bounds x="265" y="59" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_101eypm_di" bpmnElement="SequenceFlow_101eypm">
+        <di:waypoint x="215" y="99" />
+        <di:waypoint x="265" y="99" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_11mnpy7_di" bpmnElement="SequenceFlow_11mnpy7">
+        <di:waypoint x="365" y="99" />
+        <di:waypoint x="415" y="99" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

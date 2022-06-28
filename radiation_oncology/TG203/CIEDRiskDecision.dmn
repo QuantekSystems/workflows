@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="CIEDRiskDecision" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="3.0.1">
+  <decision id="PatientCIEDRisk" name="What is the Patient CIED Risk Level?">
+    <informationRequirement id="InformationRequirement_0kzjhpz">
+      <requiredDecision href="#CIEDEstimatedDose" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0gp2vrm">
+      <requiredInput href="#InputData_072ixht" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0yjnj4m">
+      <requiredInput href="#InputData_1j163lv" />
+    </informationRequirement>
+    <authorityRequirement id="AuthorityRequirement_16jnkaj">
+      <requiredAuthority href="#KnowledgeSource_0qfpaae" />
+    </authorityRequirement>
+    <decisionTable id="decisionTable_1">
+      <input id="input_1" label="CIED Estimated Dose(cGy)">
+        <inputExpression id="inputExpression_1" typeRef="long">
+          <text>CIEDTPSDose</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_12cwmoz" label="Neutron Producing Therapy">
+        <inputExpression id="LiteralExpression_0yhbcim" typeRef="boolean">
+          <text>neutronsProduced</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_002280g" label="Pacing Independent">
+        <inputExpression id="LiteralExpression_0ng6dis" typeRef="boolean">
+          <text>pacingIndependent</text>
+        </inputExpression>
+      </input>
+      <output id="output_1" label="Risk" name="patientCIEDRisk" typeRef="string" />
+      <rule id="DecisionRule_0j2cixb">
+        <inputEntry id="UnaryTests_0lsn4zr">
+          <text>&lt;200</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08m73nm">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0r6g775">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0w0efkm">
+          <text>"LOW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0g2rpp1">
+        <inputEntry id="UnaryTests_1livc6a">
+          <text>(200..500)</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1u58eeh">
+          <text>false</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0dajg9l">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0bhrtgn">
+          <text>"MEDIUM"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_013tve3">
+        <inputEntry id="UnaryTests_086l96x">
+          <text>&gt;500</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rfyp3i">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1h0npht">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1fhv7ul">
+          <text>"HIGH"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_05e3owc">
+        <inputEntry id="UnaryTests_086qjua">
+          <text></text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0csri1k">
+          <text>true</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_06tjujg">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0j2hxqr">
+          <text>"HIGH"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="CIEDEstimatedDose" name="What is the Estimated Dose to the CIED?">
+    <informationRequirement id="InformationRequirement_1a2ey48">
+      <requiredInput href="#InputData_0hqomsy" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_05zas2j">
+      <requiredInput href="#InputData_0ds4p9i" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_01v7kk3">
+      <input id="InputClause_0riucn3" label="CIED Distance to Field Edge(cm)" camunda:inputVariable="CIEDDistance">
+        <inputExpression id="LiteralExpression_154pe2f" typeRef="integer" />
+      </input>
+      <input id="InputClause_1npuokd" label="TPS Estimated Dose (cGy)" camunda:inputVariable="CIEDTPSDose">
+        <inputExpression id="LiteralExpression_1bynm66" typeRef="integer">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="OutputClause_1s1fdv0" label="CIED Estimated Dose (cGy)" name="CIEDEstimatedDose" typeRef="integer" />
+      <output id="OutputClause_1pf7yhb" label="CIED Measurement Required" name="CIEDMeasurementRequired" typeRef="boolean" />
+      <rule id="DecisionRule_0karfxz">
+        <inputEntry id="UnaryTests_1pnfqlz">
+          <text>&gt;=10</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09um8sc">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0xwo38a">
+          <text>199</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1s93z5k">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0ahk7ax">
+        <inputEntry id="UnaryTests_0vpud89">
+          <text>(3..10)</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qusppr">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0quzjcv">
+          <text>CIEDTPSDose</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1oxdoaf">
+          <text>true</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0bp9w3y">
+        <inputEntry id="UnaryTests_069evkp">
+          <text>&lt;=3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1bb5aa1">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0h6xmlf">
+          <text>CIEDTPSDose</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1ah21fg">
+          <text>false</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <knowledgeSource id="KnowledgeSource_0qfpaae" name="AAPM TG-203 Report" />
+  <inputData id="InputData_0hqomsy" name="Distance of CIED to Field Edge" />
+  <inputData id="InputData_0ds4p9i" name="Treatment Planning System Dose" />
+  <inputData id="InputData_072ixht" name="Neutron Producing Therapy" />
+  <inputData id="InputData_1j163lv" name="Pacing Dependency" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram id="DMNDiagram_1g1lriq">
+      <dmndi:DMNShape id="DMNShape_1voirio" dmnElementRef="PatientCIEDRisk">
+        <dc:Bounds height="80" width="180" x="439" y="114" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0lqh1om" dmnElementRef="AuthorityRequirement_16jnkaj">
+        <di:waypoint x="351" y="159" />
+        <di:waypoint x="439" y="158" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0ahookx" dmnElementRef="InformationRequirement_0kzjhpz">
+        <di:waypoint x="370" y="259" />
+        <di:waypoint x="441" y="194" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0duew5b" dmnElementRef="InformationRequirement_0gp2vrm">
+        <di:waypoint x="516" y="271" />
+        <di:waypoint x="516" y="194" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0fdlpcm" dmnElementRef="InformationRequirement_0yjnj4m">
+        <di:waypoint x="664" y="268" />
+        <di:waypoint x="618" y="194" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1vnyh31" dmnElementRef="CIEDEstimatedDose">
+        <dc:Bounds height="80" width="180" x="236" y="259" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_18ftat8" dmnElementRef="InformationRequirement_1a2ey48">
+        <di:waypoint x="234" y="390" />
+        <di:waypoint x="268" y="339" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_10lirzc" dmnElementRef="InformationRequirement_05zas2j">
+        <di:waypoint x="391" y="395" />
+        <di:waypoint x="377" y="339" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0ffek1x" dmnElementRef="KnowledgeSource_0qfpaae">
+        <dc:Bounds height="63" width="100" x="251" y="128" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1gmn3mq" dmnElementRef="InputData_0hqomsy">
+        <dc:Bounds height="45" width="125" x="156" y="390" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_17ohkql" dmnElementRef="InputData_0ds4p9i">
+        <dc:Bounds height="45" width="125" x="334" y="395" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1mfkrx3" dmnElementRef="InputData_072ixht">
+        <dc:Bounds height="45" width="125" x="453" y="271" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_13dnr2g" dmnElementRef="InputData_1j163lv">
+        <dc:Bounds height="45" width="125" x="615" y="268" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
