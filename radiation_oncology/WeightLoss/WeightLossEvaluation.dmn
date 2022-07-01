@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1rfvmiy" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <decision id="Decision_025p51w" name="Weight Loss Evaluation">
+    <informationRequirement id="InformationRequirement_0gbkoc2">
+      <requiredInput href="#InputData_1g6vo1w" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1mold9t">
+      <requiredInput href="#InputData_136fnnq" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1t9bngf">
+      <input id="Input_1" label="Weight Loss %">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="Weight Loss Result" typeRef="string" />
+      <rule id="DecisionRule_0slpw23">
+        <inputEntry id="UnaryTests_02w6ueq">
+          <text>&lt;5</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0tx5y86">
+          <text>"LOW"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1a0envl">
+        <inputEntry id="UnaryTests_0p1gewd">
+          <text>[5..10)</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1m1wjeh">
+          <text>"MEDIUM"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1t95jou">
+        <inputEntry id="UnaryTests_03dt92b">
+          <text>&gt;10</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0dek6xf">
+          <text>"HIGH"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_136fnnq" name="Planning Weight" />
+  <inputData id="InputData_1g6vo1w" name="Current Weight" />
+  <textAnnotation id="TextAnnotation_1nqs6jl">
+    <text>Weight of patient when radiation therapy  planning CT performed</text>
+  </textAnnotation>
+  <association id="Association_1mvgxst">
+    <sourceRef href="#TextAnnotation_1nqs6jl" />
+    <targetRef href="#InputData_136fnnq" />
+  </association>
+  <textAnnotation id="TextAnnotation_1y7pso3">
+    <text>Current weight while on treatment</text>
+  </textAnnotation>
+  <association id="Association_1a6qmol">
+    <sourceRef href="#TextAnnotation_1y7pso3" />
+    <targetRef href="#InputData_1g6vo1w" />
+  </association>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_025p51w">
+        <dc:Bounds height="80" width="180" x="400" y="80" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1bq8oqj" dmnElementRef="InputData_136fnnq">
+        <dc:Bounds height="45" width="125" x="267" y="268" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1m3firo" dmnElementRef="InputData_1g6vo1w">
+        <dc:Bounds height="45" width="125" x="567" y="268" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0bcvum4" dmnElementRef="InformationRequirement_0gbkoc2">
+        <di:waypoint x="630" y="268" />
+        <di:waypoint x="520" y="180" />
+        <di:waypoint x="520" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_16tuadn" dmnElementRef="InformationRequirement_1mold9t">
+        <di:waypoint x="330" y="268" />
+        <di:waypoint x="460" y="180" />
+        <di:waypoint x="460" y="160" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1sdj8iv" dmnElementRef="TextAnnotation_1nqs6jl">
+        <dc:Bounds height="100" width="100" x="160" y="320" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0arfs35" dmnElementRef="Association_1mvgxst">
+        <di:waypoint x="260" y="331" />
+        <di:waypoint x="292" y="313" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1qvqctu" dmnElementRef="TextAnnotation_1y7pso3">
+        <dc:Bounds height="60" width="100" x="710" y="320" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1corc57" dmnElementRef="Association_1a6qmol">
+        <di:waypoint x="710" y="333" />
+        <di:waypoint x="671" y="313" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

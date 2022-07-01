@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:biodi="http://bpmn.io/schema/dmn/biodi/2.0" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_1rm7xcf" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0" camunda:diagramRelationId="8e6ebff7-24b0-459f-917c-8b5a59de648a" xmlns:camunda="http://camunda.org/schema/1.0/bpmn">
+  <decision id="Decision_106s3j3" name="Determine Non-Target Structures">
+    <informationRequirement id="InformationRequirement_1higcmr">
+      <requiredInput href="#InputData_05mlz9z"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0skkjrp">
+      <requiredInput href="#InputData_1xpzs4v"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1fft9pc">
+      <requiredInput href="#InputData_1hm7cai"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1wo0r6a">
+      <requiredInput href="#InputData_1loubbn"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0no2llf">
+      <requiredInput href="#InputData_0hfmam8"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1st4yia">
+      <requiredInput href="#InputData_17mo31u"/>
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1a2419q" hitPolicy="COLLECT">
+      <input id="Input_1" label="Treatment Site" biodi:width="325">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>treatmentSite</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1wm52wl" label="Laterality">
+        <inputExpression id="LiteralExpression_0qlkyua" typeRef="string">
+          <text>laterality</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1vl9plq" label="Clinical Trial">
+        <inputExpression id="LiteralExpression_12fm4xe" typeRef="boolean">
+          <text>clinicalTrial</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0p5l02z" label="CIED">
+        <inputExpression id="LiteralExpression_1e7rrf7" typeRef="boolean">
+          <text>cied</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Structure Name" name="structureName" typeRef="string"/>
+      <output id="OutputClause_1bq6fw0" label="Structure Dicom Type" name="dicomType" typeRef="string">
+        <outputValues id="UnaryTests_0wso9gr">
+          <text>"AVOIDANCE","CAVITY","CONTRAST_AGENT","CTV","EXTERNAL","GTV","IRRAD_VOLUME","ORGAN","PTV","TREATED_VOLUME","SUPPORT","FIXATION","CONTROL","DOSE_REGION"</text>
+        </outputValues>
+      </output>
+      <rule id="DecisionRule_09ck4hq">
+        <inputEntry id="UnaryTests_1agl1ip">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0lg320q">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1u5vzbh">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10focyf">
+          <text>true</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1byh5fc">
+          <text>"Pacemaker"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0a3kfus">
+          <text/>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_15maxxv">
+        <inputEntry id="UnaryTests_0txi49a">
+          <text>"Brain", "Spine - Cervical", "Craniospinal", "Face", "Parotid", "Orbit", "Sinonasal", "Nasopharynx", "Oropharynx", "Larynx", "Hypopharynx", "Thyroid", "Cervical Esophagus", "Neck"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0g30f8e">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c05rfr">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0oxk9b9">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0hs9100">
+          <text>"Brainstem"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0qu2ghn">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_13lucvi">
+        <inputEntry id="UnaryTests_0lag4a0">
+          <text>"Brain", "Craniospinal", "Face", "Parotid", "Orbit", "Sinonasal", "Nasopharynx"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0l9qap1">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0p1ff6d">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0v8fpy6">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0f8zot4">
+          <text>"Eye_L"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_00x1tjw">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_19iqf42">
+        <inputEntry id="UnaryTests_148o5z0">
+          <text>"Brain", "Craniospinal", "Face", "Parotid", "Orbit", "Sinonasal", "Nasopharynx"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lofwly">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0v4u5ig">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vjx3ak">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_00kwbmb">
+          <text>"Eye_R"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ifixwy">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1mrsnbq">
+        <inputEntry id="UnaryTests_0ybwnt4">
+          <text>"Brain", "Craniospinal", "Sinonasal", "Nasopharynx"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14epwy2">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1x9m0z9">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fgwf62">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0z3uwm8">
+          <text>"OpticChiasm"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0vpztix">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0dhu5xv">
+        <inputEntry id="UnaryTests_1ynts0c">
+          <text>contains(?, "Spine"), "Craniospinal", "Face", "Parotid", "Sinonasal", "Nasopharynx", "Oropharynx", "Larynx", "Hypopharynx", "Thyroid", "Cervical Esophagus", "Neck", "Axilla", "Lung", "Mediastinum", "Thymus", "Esophagus", "Lower Esophagus", "Gastroesophageal Junction", "Stochmac", "Spleen", "Pancreas", "Liver", "Renal", "Adrenal", "Paraaortic", "Retroperitoneal Space"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1c2kn21">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1utxs4p">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0py3w1l">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0zplyds">
+          <text>"SpinalCord"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_01gt8h8">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1a2q6ub">
+        <inputEntry id="UnaryTests_0dl1ur2">
+          <text>"Spine - Thoracic", "Craniospinal", "Breast", "Chestwall", "Axilla", "Lung", "Mediastinum", "Thymus", "Esophagus", "Lower Esophagus", "Gastroesophageal Junction", "Stomach", "Spleen"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00qwf1t">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0czdv1q">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s7l889">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rdoday">
+          <text>"Heart"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0kwu8k7">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1o44oi0">
+        <inputEntry id="UnaryTests_1p7yzxp">
+          <text>"Spine - Thoracic", "Craniospinal", "Lung", "Mediastinum", "Thymus", "Esophagus", "Lower Esophagus", "Gastroesophageal Junction", "Stomach",</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08nggai">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1utfkkv">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_18ghcgt">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0vlhbqo">
+          <text>"Lungs"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0x5lnfx">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1g5q67n">
+        <inputEntry id="UnaryTests_1nyjw72">
+          <text>"Breast", "Chestwall", "Axilla", "Lung", "Spleen"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1es63c3">
+          <text>"Left"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0uo6fnk">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1f6816q">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_057hajr">
+          <text>"Lung_L"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1q85ta3">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0yv3bja">
+        <inputEntry id="UnaryTests_0npsr2v">
+          <text>"Breast", "Chestwall", "Axilla", "Lung", "Spleen"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_14q3jw5">
+          <text>"Right"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g49oy8">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1lzn0h6">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_05sgv8r">
+          <text>"Lung_R"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1168afs">
+          <text>"ORGAN"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_05mlz9z" name="Treatment Site"/>
+  <inputData id="InputData_1xpzs4v" name="Clinical Trial"/>
+  <inputData id="InputData_1hm7cai" name="CIED"/>
+  <inputData id="InputData_1loubbn" name="Gender"/>
+  <inputData id="InputData_0hfmam8" name="Radiation Oncologist"/>
+  <inputData id="InputData_17mo31u" name="Laterality"/>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_106s3j3">
+        <dc:Bounds height="80" width="180" x="450" y="80"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0hfra4h" dmnElementRef="InputData_05mlz9z">
+        <dc:Bounds height="45" width="125" x="157" y="258"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0x2q826" dmnElementRef="InformationRequirement_1higcmr">
+        <di:waypoint x="220" y="258"/>
+        <di:waypoint x="476" y="180"/>
+        <di:waypoint x="476" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0ip5clo" dmnElementRef="InputData_1xpzs4v">
+        <dc:Bounds height="45" width="125" x="917" y="258"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1vcdxzp" dmnElementRef="InformationRequirement_0skkjrp">
+        <di:waypoint x="980" y="258"/>
+        <di:waypoint x="604" y="180"/>
+        <di:waypoint x="604" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1m5bzbx" dmnElementRef="InputData_1hm7cai">
+        <dc:Bounds height="45" width="125" x="457" y="259"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1hxs777" dmnElementRef="InformationRequirement_1fft9pc">
+        <di:waypoint x="520" y="259"/>
+        <di:waypoint x="527" y="180"/>
+        <di:waypoint x="527" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_11k0f6f" dmnElementRef="InputData_1loubbn">
+        <dc:Bounds height="45" width="125" x="607" y="259"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1f0j6ab" dmnElementRef="InformationRequirement_1wo0r6a">
+        <di:waypoint x="670" y="259"/>
+        <di:waypoint x="553" y="180"/>
+        <di:waypoint x="553" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0qc1gyv" dmnElementRef="InputData_0hfmam8">
+        <dc:Bounds height="45" width="125" x="757" y="259"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_198v56k" dmnElementRef="InformationRequirement_0no2llf">
+        <di:waypoint x="820" y="259"/>
+        <di:waypoint x="579" y="180"/>
+        <di:waypoint x="579" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0k5cuw2" dmnElementRef="InputData_17mo31u">
+        <dc:Bounds height="45" width="125" x="297" y="259"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1ckku6o" dmnElementRef="InformationRequirement_1st4yia">
+        <di:waypoint x="360" y="259"/>
+        <di:waypoint x="501" y="180"/>
+        <di:waypoint x="501" y="160"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0fq0d9h" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0" camunda:diagramRelationId="a6135488-56e0-4f1f-a766-ba0a87cbaa54" xmlns:camunda="http://camunda.org/schema/1.0/bpmn">
+  <decision id="Decision_1nyjglu" name="DVH Evaluation">
+    <informationRequirement id="InformationRequirement_13bulg9">
+      <requiredInput href="#InputData_04xkirp"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0gellru">
+      <requiredInput href="#InputData_0y848qr"/>
+    </informationRequirement>
+    <decisionTable id="DecisionTable_1srttx6">
+      <input id="Input_1" label="Constraint">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text/>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1lfkrmn" label="Volume [cc]">
+        <inputExpression id="LiteralExpression_0rc0dgw" typeRef="string">
+          <text/>
+        </inputExpression>
+      </input>
+      <input id="InputClause_1o332nz" label="Volume [%]">
+        <inputExpression id="LiteralExpression_1rj65mr" typeRef="string">
+          <text/>
+        </inputExpression>
+      </input>
+      <input id="InputClause_02kyaia" label="Dose [Gy]">
+        <inputExpression id="LiteralExpression_1a909ua" typeRef="string">
+          <text/>
+        </inputExpression>
+      </input>
+      <input id="InputClause_10f5gsh" label="Dose [%]">
+        <inputExpression id="LiteralExpression_1myur17" typeRef="string">
+          <text/>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Pass/Fail" name="result" typeRef="string"/>
+      <output id="OutputClause_045sxsq" label="Source" name="source" typeRef="string"/>
+      <output id="OutputClause_12r7rrb" label="Toxicity End Point" typeRef="string"/>
+      <rule id="DecisionRule_19zlp80">
+        <inputEntry id="UnaryTests_09n92mt">
+          <text>"V8Gy[cc]"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dkf914">
+          <text>&lt;0.2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_104ij9m">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_17oxpon">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vci5xr">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_13z358k">
+          <text/>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_09l4ubc">
+          <text/>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0afwr5y">
+          <text/>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_04xkirp" name="TG263 Constraint"/>
+  <inputData id="InputData_0y848qr" name="DVH Value"/>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1nyjglu">
+        <dc:Bounds height="80" width="180" x="550" y="260"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1ri8usc" dmnElementRef="InputData_04xkirp">
+        <dc:Bounds height="45" width="125" x="447" y="457"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0p9sg2e" dmnElementRef="InformationRequirement_13bulg9">
+        <di:waypoint x="510" y="457"/>
+        <di:waypoint x="610" y="360"/>
+        <di:waypoint x="610" y="340"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_1sn0v7a" dmnElementRef="InputData_0y848qr">
+        <dc:Bounds height="45" width="125" x="658" y="458"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_13jwu26" dmnElementRef="InformationRequirement_0gellru">
+        <di:waypoint x="721" y="458"/>
+        <di:waypoint x="670" y="360"/>
+        <di:waypoint x="670" y="340"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

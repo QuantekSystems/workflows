@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8"?><definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_0a2ftte" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.12.0" camunda:diagramRelationId="bf6cee11-9d2d-41a1-83c5-ea786bcbd09d" xmlns:camunda="http://camunda.org/schema/1.0/bpmn">
+  <decision id="Decision_1t4dbj4" name="Determine Dose Constraints">
+    <informationRequirement id="InformationRequirement_057y7fj">
+      <requiredInput href="#InputData_0kiimev"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_04zz2ad">
+      <requiredInput href="#InputData_1c5uo6b"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_0iksfd9">
+      <requiredInput href="#InputData_0vngjje"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1azw8t1">
+      <requiredInput href="#InputData_1ngdjxb"/>
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_1ex6t2w">
+      <requiredInput href="#InputData_1iu0oeo"/>
+    </informationRequirement>
+    <decisionTable id="DecisionTable_0rh3ki6" hitPolicy="COLLECT">
+      <input id="Input_1" label="Treatment Site">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>treatmentSite</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0nxm3wy" label="Structure Name">
+        <inputExpression id="LiteralExpression_03vxnov" typeRef="string">
+          <text/>
+        </inputExpression>
+      </input>
+      <input id="InputClause_141peey" label="Dose Per Fraction (Gy)">
+        <inputExpression id="LiteralExpression_0rrqstm" typeRef="string">
+          <text>dosePerFraction</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0zcvqqa" label="Number of Fractions">
+        <inputExpression id="LiteralExpression_0n5v13j" typeRef="string">
+          <text>numFractions</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0oifef4" label="Radiation Oncologist">
+        <inputExpression id="LiteralExpression_1q6a4sz" typeRef="string">
+          <text/>
+        </inputExpression>
+      </input>
+      <input id="InputClause_0vhp8y9" label="Protocol">
+        <inputExpression id="LiteralExpression_1j4cwvn" typeRef="string">
+          <text>protocol</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="Constraint" name="constraint" typeRef="string"/>
+      <output id="OutputClause_1xgx2im" label="Source" name="source" typeRef="string"/>
+      <output id="OutputClause_0fmt1g4" label="Toxicity Endpoint" typeRef="string"/>
+      <rule id="DecisionRule_1h27wnz">
+        <inputEntry id="UnaryTests_0o0qlki">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00d3fg4">
+          <text>"OpticChiasm"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_15n67pn">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1xq3t9o">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hbcm3a">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1m3olhc">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_02zqiia">
+          <text>"V8Gy[cc]&lt;0.2cc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0uyv6kc">
+          <text>"TG 101"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_01sopsr">
+          <text>"Neuritis"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_090n40d">
+        <inputEntry id="UnaryTests_1236dro">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0o6mqn8">
+          <text>"OpticChiasm"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1okt557">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09yn50h">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1rm42os">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_04uxszl">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0itth6h">
+          <text>"V15.3Gy[cc]&lt;0.2cc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_13ua7q6">
+          <text>"TG 101"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_07wdy93">
+          <text>"Neuritis"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0z201vj">
+        <inputEntry id="UnaryTests_1p4gfr7">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0vm5a4d">
+          <text>"OpticChiasm"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ga7mox">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y480w7">
+          <text>5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1qlvw29">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_09s99fr">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_03gjv96">
+          <text>"V25.3Gy[cc]&lt;0.2cc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0a4erfo">
+          <text>"TG 101"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ciffr2">
+          <text>"Neuritis"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1wtgld7">
+        <inputEntry id="UnaryTests_08r60t4">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1dzska4">
+          <text>"Heart", "Pericardium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_01in1z5">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ota8u7">
+          <text>1</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_13mvese">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_150zuoo">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ayos88">
+          <text>"V16Gy[cc]&lt;15cc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0mbqnzj">
+          <text>"TG 101"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1p19u44">
+          <text>"Pericarditis"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_01eyxf3">
+        <inputEntry id="UnaryTests_19o260x">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_16uvkts">
+          <text>"Heart", "Pericardium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1f21pg1">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s3s7b2">
+          <text>3</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s3qimn">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0ewfw93">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_101xigf">
+          <text>"V24Gy[cc]&lt;15cc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0h4ekop">
+          <text>"TG 101"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1qvj3k7">
+          <text>"Pericarditis"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0x0o3ra">
+        <inputEntry id="UnaryTests_1kyc8dk">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0movjpj">
+          <text>"Heart", "Pericardium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0a9t5xk">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0qz3zwc">
+          <text>5</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1j1z6qg">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_170nbfr">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ai3y41">
+          <text>"V32Gy[cc]&lt;15cc"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_159gtye">
+          <text>"TG 101"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1fz2ae3">
+          <text>"Pericarditis"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1ebw6dw">
+        <inputEntry id="UnaryTests_1yntq3v">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_08p91nv">
+          <text>"Pericardium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_10wro5b">
+          <text>&lt;=2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1ymt85u">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1v28tfy">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_157vyol">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1bpnsix">
+          <text>"Mean[Gy]&lt;26Gy"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1s81ajl">
+          <text>"QUANTEC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0hwznwp">
+          <text>"Pericarditis"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0xwg7bm">
+        <inputEntry id="UnaryTests_04h58g9">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0iyt2ju">
+          <text>"Pericardium"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0yfq5hi">
+          <text>&lt;=2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0hxqsqj">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0n9zbhb">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1osnazc">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_169gz65">
+          <text>"V30Gy[%]&lt;46%"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0jtx548">
+          <text>"QUANTEC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ih9uez">
+          <text>"Pericarditis"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1dl2yew">
+        <inputEntry id="UnaryTests_1y850gy">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1jez351">
+          <text>"Heart"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1wg2xcr">
+          <text>&lt;=2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1g0e2zf">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0puq3rb">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0y27qsr">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1ne7ahp">
+          <text>"V25Gy[%]&lt;10%</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0v3dgwp">
+          <text>"QUANTEC"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_15vcwwy">
+          <text>"Long term cardiac mortality"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_102hhni">
+        <inputEntry id="UnaryTests_1bf61gl">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0t54r3u">
+          <text>"Heart"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1fbq8ad">
+          <text>&lt;=2</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0k9bnfd">
+          <text/>
+        </inputEntry>
+        <inputEntry id="UnaryTests_00re2mr">
+          <text>"Dr. Jones"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0f0rr4r">
+          <text/>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_170q40v">
+          <text>"V25Gy[%]&lt;5%"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0x0kcga">
+          <text>"Dr. Jones"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0q3mlqj">
+          <text/>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_0kiimev" name="Treatment Site"/>
+  <inputData id="InputData_1c5uo6b" name="Radiation Oncologist"/>
+  <inputData id="InputData_0vngjje" name="Dose Per Fraction"/>
+  <inputData id="InputData_1ngdjxb" name="Number of Fractions"/>
+  <inputData id="InputData_1iu0oeo" name="Protocol"/>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_1t4dbj4">
+        <dc:Bounds height="80" width="180" x="470" y="80"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0mplrs7" dmnElementRef="InputData_0kiimev">
+        <dc:Bounds height="45" width="125" x="157" y="246"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_0wot7id" dmnElementRef="InputData_1c5uo6b">
+        <dc:Bounds height="45" width="125" x="317" y="247"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1m31i6q" dmnElementRef="InputData_0vngjje">
+        <dc:Bounds height="45" width="125" x="477" y="247"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_026ehqe" dmnElementRef="InputData_1ngdjxb">
+        <dc:Bounds height="45" width="125" x="637" y="247"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_01xottx" dmnElementRef="InputData_1iu0oeo">
+        <dc:Bounds height="45" width="125" x="807" y="247"/>
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_1f0xfl0" dmnElementRef="InformationRequirement_057y7fj">
+        <di:waypoint x="220" y="246"/>
+        <di:waypoint x="500" y="180"/>
+        <di:waypoint x="500" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0250y1c" dmnElementRef="InformationRequirement_04zz2ad">
+        <di:waypoint x="380" y="247"/>
+        <di:waypoint x="530" y="180"/>
+        <di:waypoint x="530" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_0ilzn71" dmnElementRef="InformationRequirement_0iksfd9">
+        <di:waypoint x="540" y="247"/>
+        <di:waypoint x="560" y="180"/>
+        <di:waypoint x="560" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1b784au" dmnElementRef="InformationRequirement_1azw8t1">
+        <di:waypoint x="700" y="247"/>
+        <di:waypoint x="590" y="180"/>
+        <di:waypoint x="590" y="160"/>
+      </dmndi:DMNEdge>
+      <dmndi:DMNEdge id="DMNEdge_1y4uvv9" dmnElementRef="InformationRequirement_1ex6t2w">
+        <di:waypoint x="870" y="247"/>
+        <di:waypoint x="620" y="180"/>
+        <di:waypoint x="620" y="160"/>
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

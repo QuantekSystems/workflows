@@ -1,0 +1,8 @@
+{
+	"id": "com.quanteksystems.radiationoncology.weightloss",
+	"label": "Weight Loss Replan Evaluation",
+	"author": "Gabe Colburn",
+	"organization": "Quantek Systems",
+	"license": "MIT",
+	"description": "This workflow is intended to automatically evaluate weight loss of a patient when a new weight observation is created in a health information system. A decision table is executed to evaluate the weight loss level, low, medium, or high. If the weight loss is high, a new CT scan order is created. The workflow waits for the CT scan to be complete, and then a decision to be made by the physician whether to replan the treatment. If the decision is yes, a notification is sent to replan the treatment."
+}
