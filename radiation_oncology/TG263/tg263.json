@@ -1,8 +1,8 @@
 {
 	"id": "com.quanteksystems.radiationoncology.TG263",
 	"label": "TG-263",
-	"author": "Gabe Colburn",
-	"organization": "Quantek Systems",
+	"author": {"id": "gabe.colburn", "name":"Gabe Colburn", "linkedin": "https://www.linkedin.com/in/gabe-colburn"},
+	"organization": {"id": "quanteksystems", "name": "Quantek Systems", "website": "www.quanteksystems.com", "linkedin": "https://www.linkedin.com/company/quantek-systems/"},
 	"license": "MIT",
 	"description": "Clinical workflows based on AAPM TG-263 - Standardizing Nomenclatures in Radiation Oncology. These workflows describe implementation of standardized non-target and target structures to be generated in a treatment planning system. They consist of DMN decision tables to determine appropriate structures and dose constraints based on treatment site, radiation oncologist, dose per fraction, number of fractions, and protocol. After the appropriate structures and constraints have been determined, a BPMN service task or scripting task can be used to generate the structures and constraints in the TPS."
 }

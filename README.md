@@ -11,8 +11,8 @@ Beneath is an example format to describe your project:
 {
 	"id": "my.project.id",
 	"label": "Project Name",
-	"author": "One or more authors",
-	"organization": "Optional Organization",
+	"author": {"id": "unique.author.name", "name":"John Doe", "linkedin": "url to linked in profile"},
+	"organization": {"id": "organization.name", "name": "Organization Name", "website": "url to website", "linkedin": "url to linked in profile"}
 	"license": "MIT",
 	"description": "Description of workflow project to provide context around use case, and the related files such as BPMN and DMN."
 }

@@ -1,8 +1,8 @@
 {
 	"id": "com.quanteksystems.radiationoncology.TG203",
 	"label": "TG-203",
-	"author": "Gabe Colburn",
-	"organization": "Quantek Systems",
+	"author": {"id": "gabe.colburn", "name":"Gabe Colburn", "linkedin": "https://www.linkedin.com/in/gabe-colburn"},
+	"organization": {"id": "quanteksystems", "name": "Quantek Systems", "website": "www.quanteksystems.com", "linkedin": "https://www.linkedin.com/company/quantek-systems/"},
 	"license": "MIT",
 	"description": "Clinical workflows based on AAPM TG-203 - Management of Radiotherapy Patients with Implanted Cardiac Pacemakers and Defibrillators. These workflows are intended to be started if a patient has a cardiac implanted electronic device. A suggested risk level assessment is determined by clinician entered rules based on input data. Based on the risk level, appropriate workflows are created to manage care."
 }
