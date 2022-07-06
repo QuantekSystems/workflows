@@ -1,0 +1,8 @@
+{
+	"id": "com.quanteksystems.radiationoncology.preauth",
+	"label": "Insurance Pre-Authorization",
+	"author": {"id": "gabe.colburn", "name":"Gabe Colburn", "linkedin": "https://www.linkedin.com/in/gabe-colburn"},
+	"organization": {"id": "quanteksystems", "name": "Quantek Systems", "website": "www.quanteksystems.com", "linkedin": "https://www.linkedin.com/company/quantek-systems/"},
+	"license": "MIT",
+	"description": "This workflow manages prior authorization at the high level. Call activities implement the details of intake and prior auth submission. If the treatment is approved, the workflow proceeds to financial clearance. Otherwise the appeal process is started. If the appeal is approved, it will continue to financial clearance. Otherwise the patient is converted to a different treatment type. Optionally, the prior auth process can be cancelled at any activity."
+}

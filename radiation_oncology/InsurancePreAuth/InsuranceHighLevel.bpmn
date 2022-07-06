@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1xl9b8b" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.12.0">
+  <bpmn:error id="Error_0ded16j" name="Cancelled Error" errorCode="CanceledError" />
+  <bpmn:collaboration id="Collaboration_0uhvf4t">
+    <bpmn:participant id="RODynamics" name="RO Dynamics" processRef="PriorAuthProcess" />
+  </bpmn:collaboration>
+  <bpmn:process id="PriorAuthProcess" name="Prior Auth Process" processType="None" isClosed="false" isExecutable="true">
+    <bpmn:startEvent id="PriorAuthStartEvent" name="Start Prior Auth">
+      <bpmn:outgoing>SequenceFlow_03kndbu</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="ApprovedForTreatmentEndEvent" name="Approved for Treatment">
+      <bpmn:incoming>SequenceFlow_09gd8a6</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:callActivity id="IntakeActivity" name="Complete Intake" calledElement="IntakeProcess">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1nz1mae</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_10w5iow</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:callActivity id="PriorAuthSubmissionActivity" name="Submit Prior Auth" calledElement="PriorAuthSubmissionProcess">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out source="priorAuthApproved" target="priorAuthApproved" />
+        <camunda:out source="DiagnosisSupportedByMedicalPolicyTask" target="DiagnosisSupportedByMedicalPolicyTask" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_10w5iow</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1wwivj4</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_044z99f" name="Approved?" default="SequenceFlow_1trv2msFlow">
+      <bpmn:incoming>SequenceFlow_1wwivj4</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_11ssnrmFlow</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_1trv2msFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:callActivity id="FinancialClearanceActivity" name="Complete Financial Clearance" calledElement="FinancialClearanceProcess">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_11ssnrmFlow</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0kn1birFlow</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_09gd8a6</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:callActivity id="SubmitAppealActivity" name="Submit Appeal" calledElement="AppealProcess">
+      <bpmn:extensionElements>
+        <camunda:in variables="all" />
+        <camunda:out source="ConvertToDifferentTreatmentTask" target="ConvertToDifferentTreatmentTask" />
+        <camunda:out source="IROAppealSelfPayTask" target="IROAppealSelfPayTask" />
+        <camunda:out source="appealApproved" target="appealApproved" />
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_1trv2msFlow</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_05paogj</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_1u0scur" name="Appeal Approved?">
+      <bpmn:incoming>SequenceFlow_05paogj</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_195zf3vFlow</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0kn1birFlow</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="ExclusiveGateway_0dxwmfv">
+      <bpmn:incoming>SequenceFlow_03kndbu</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_195zf3vFlow</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1nz1mae</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="EndEvent_0rcnm1j" name="Cancelled">
+      <bpmn:incoming>SequenceFlow_147yik5</bpmn:incoming>
+      <bpmn:errorEventDefinition errorRef="Error_0ded16j" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_0w83w9x" name="Cancelled">
+      <bpmn:incoming>SequenceFlow_11rbgwg</bpmn:incoming>
+      <bpmn:errorEventDefinition errorRef="Error_0ded16j" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_1fssw01" name="Cancelled">
+      <bpmn:incoming>SequenceFlow_0rmmwql</bpmn:incoming>
+      <bpmn:errorEventDefinition errorRef="Error_0ded16j" />
+    </bpmn:endEvent>
+    <bpmn:endEvent id="EndEvent_1gh1jr9" name="Cancelled">
+      <bpmn:incoming>SequenceFlow_0og4ol1</bpmn:incoming>
+      <bpmn:errorEventDefinition errorRef="Error_0ded16j" />
+    </bpmn:endEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1uewgu7" attachedToRef="SubmitAppealActivity">
+      <bpmn:outgoing>SequenceFlow_0rmmwql</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_0ded16j" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1w4hyvt" attachedToRef="FinancialClearanceActivity">
+      <bpmn:outgoing>SequenceFlow_0og4ol1</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_0ded16j" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1op2seh" attachedToRef="PriorAuthSubmissionActivity">
+      <bpmn:outgoing>SequenceFlow_11rbgwg</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_0ded16j" />
+    </bpmn:boundaryEvent>
+    <bpmn:boundaryEvent id="BoundaryEvent_1rvicy9" attachedToRef="IntakeActivity">
+      <bpmn:outgoing>SequenceFlow_147yik5</bpmn:outgoing>
+      <bpmn:errorEventDefinition errorRef="Error_0ded16j" />
+    </bpmn:boundaryEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0kn1birFlow" name="Yes" sourceRef="ExclusiveGateway_1u0scur" targetRef="FinancialClearanceActivity">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${appealApproved != null &amp;&amp; appealApproved == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_05paogj" sourceRef="SubmitAppealActivity" targetRef="ExclusiveGateway_1u0scur" />
+    <bpmn:sequenceFlow id="SequenceFlow_195zf3vFlow" name="No Convert to Different Treatment" sourceRef="ExclusiveGateway_1u0scur" targetRef="ExclusiveGateway_0dxwmfv">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${ConvertToDifferentTreatmentTask != null &amp;&amp; S(ConvertToDifferentTreatmentTask).prop("status").stringValue() == "YES"}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1nz1mae" sourceRef="ExclusiveGateway_0dxwmfv" targetRef="IntakeActivity" />
+    <bpmn:sequenceFlow id="SequenceFlow_03kndbu" sourceRef="PriorAuthStartEvent" targetRef="ExclusiveGateway_0dxwmfv" />
+    <bpmn:sequenceFlow id="SequenceFlow_0rmmwql" sourceRef="BoundaryEvent_1uewgu7" targetRef="EndEvent_1fssw01" />
+    <bpmn:sequenceFlow id="SequenceFlow_1trv2msFlow" name="Rejected" sourceRef="ExclusiveGateway_044z99f" targetRef="SubmitAppealActivity" />
+    <bpmn:sequenceFlow id="SequenceFlow_0og4ol1" sourceRef="BoundaryEvent_1w4hyvt" targetRef="EndEvent_1gh1jr9" />
+    <bpmn:sequenceFlow id="SequenceFlow_09gd8a6" sourceRef="FinancialClearanceActivity" targetRef="ApprovedForTreatmentEndEvent" />
+    <bpmn:sequenceFlow id="SequenceFlow_11ssnrmFlow" name="Approved" sourceRef="ExclusiveGateway_044z99f" targetRef="FinancialClearanceActivity">
+      <bpmn:conditionExpression id="conditionExpression_5d0b5539-e160-4b10-889f-990f5b11d4c5">${priorAuthApproved != null &amp;&amp; priorAuthApproved == true}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_1wwivj4" sourceRef="PriorAuthSubmissionActivity" targetRef="ExclusiveGateway_044z99f" />
+    <bpmn:sequenceFlow id="SequenceFlow_11rbgwg" sourceRef="BoundaryEvent_1op2seh" targetRef="EndEvent_0w83w9x" />
+    <bpmn:sequenceFlow id="SequenceFlow_10w5iow" sourceRef="IntakeActivity" targetRef="PriorAuthSubmissionActivity" />
+    <bpmn:sequenceFlow id="SequenceFlow_147yik5" sourceRef="BoundaryEvent_1rvicy9" targetRef="EndEvent_0rcnm1j" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_0uhvf4t">
+      <bpmndi:BPMNShape id="Participant_0qrm0f4_di" bpmnElement="RODynamics" isHorizontal="true">
+        <dc:Bounds x="124" y="59" width="1090" height="529" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_0kn1bir_di" bpmnElement="SequenceFlow_0kn1birFlow">
+        <di:waypoint x="936" y="323" />
+        <di:waypoint x="936" y="161" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="910" y="270" width="18" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_05paogj_di" bpmnElement="SequenceFlow_05paogj">
+        <di:waypoint x="779" y="348" />
+        <di:waypoint x="911" y="348" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_195zf3v_di" bpmnElement="SequenceFlow_195zf3vFlow">
+        <di:waypoint x="936" y="373" />
+        <di:waypoint x="936" y="528" />
+        <di:waypoint x="295" y="528" />
+        <di:waypoint x="295" y="146" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="865" y="384" width="68" height="40" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1nz1mae_di" bpmnElement="SequenceFlow_1nz1mae">
+        <di:waypoint x="320" y="121" />
+        <di:waypoint x="378" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_03kndbu_di" bpmnElement="SequenceFlow_03kndbu">
+        <di:waypoint x="212" y="121" />
+        <di:waypoint x="270" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0rmmwql_di" bpmnElement="SequenceFlow_0rmmwql">
+        <di:waypoint x="779" y="406" />
+        <di:waypoint x="779" y="450" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1trv2ms_di" bpmnElement="SequenceFlow_1trv2msFlow">
+        <di:waypoint x="729" y="146" />
+        <di:waypoint x="729" y="308" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="733" y="238" width="44" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0og4ol1_di" bpmnElement="SequenceFlow_0og4ol1">
+        <di:waypoint x="986" y="179" />
+        <di:waypoint x="986" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_09gd8a6_di" bpmnElement="SequenceFlow_09gd8a6">
+        <di:waypoint x="986" y="121" />
+        <di:waypoint x="1155" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_11ssnrm_di" bpmnElement="SequenceFlow_11ssnrmFlow">
+        <di:waypoint x="754" y="121" />
+        <di:waypoint x="886" y="121" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="798" y="103" width="47" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_1wwivj4_di" bpmnElement="SequenceFlow_1wwivj4">
+        <di:waypoint x="641" y="121" />
+        <di:waypoint x="704" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_11rbgwg_di" bpmnElement="SequenceFlow_11rbgwg">
+        <di:waypoint x="641" y="179" />
+        <di:waypoint x="641" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_10w5iow_di" bpmnElement="SequenceFlow_10w5iow">
+        <di:waypoint x="478" y="121" />
+        <di:waypoint x="541" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_147yik5_di" bpmnElement="SequenceFlow_147yik5">
+        <di:waypoint x="478" y="179" />
+        <di:waypoint x="478" y="227" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="PriorAuthStartEvent">
+        <dc:Bounds x="176" y="103" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="156" y="146" width="76" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1y68dqc_di" bpmnElement="ApprovedForTreatmentEndEvent">
+        <dc:Bounds x="1155" y="103" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1141" y="146" width="64" height="27" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_12ipu07_di" bpmnElement="IntakeActivity">
+        <dc:Bounds x="378" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_02duyy3_di" bpmnElement="PriorAuthSubmissionActivity">
+        <dc:Bounds x="541" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_044z99f_di" bpmnElement="ExclusiveGateway_044z99f" isMarkerVisible="true">
+        <dc:Bounds x="704" y="96" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="702" y="72" width="53" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_1ddvdws_di" bpmnElement="FinancialClearanceActivity">
+        <dc:Bounds x="886" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="CallActivity_0yz56rz_di" bpmnElement="SubmitAppealActivity">
+        <dc:Bounds x="679" y="308" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_1u0scur_di" bpmnElement="ExclusiveGateway_1u0scur" isMarkerVisible="true">
+        <dc:Bounds x="911" y="323" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="971" y="341" width="90" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ExclusiveGateway_0dxwmfv_di" bpmnElement="ExclusiveGateway_0dxwmfv" isMarkerVisible="true">
+        <dc:Bounds x="270" y="96" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0p4dosd_di" bpmnElement="EndEvent_0rcnm1j">
+        <dc:Bounds x="460" y="227" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="454" y="270" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1pab2tm_di" bpmnElement="EndEvent_0w83w9x">
+        <dc:Bounds x="623" y="227" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="617" y="270" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_0bl0qki_di" bpmnElement="EndEvent_1fssw01">
+        <dc:Bounds x="761" y="450" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="755" y="493" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1w7ggo7_di" bpmnElement="EndEvent_1gh1jr9">
+        <dc:Bounds x="968" y="227" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="962" y="270" width="49" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_11ih3ma_di" bpmnElement="BoundaryEvent_1uewgu7">
+        <dc:Bounds x="761" y="370" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_0bzcin5_di" bpmnElement="BoundaryEvent_1w4hyvt">
+        <dc:Bounds x="968" y="143" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_1o2e7b4_di" bpmnElement="BoundaryEvent_1op2seh">
+        <dc:Bounds x="623" y="143" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BoundaryEvent_0r6wmkm_di" bpmnElement="BoundaryEvent_1rvicy9">
+        <dc:Bounds x="460" y="143" width="36" height="36" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
